@@ -216,14 +216,28 @@ plt.show()
 
 ```python
 #labels for pie chart
-labels = ["Rural", "Suburban", "Urban"]
+labels = ["Urban", "Suburban", "Rural"]
 
-# Make groups and sum
-driver_groups = combined_df.groupby(['type'])
-sum_drivers = driver_groups['driver_count'].sum()
+#filtering by region
+urban_data = city_df[city_df["type"] == "Urban"]
+suburban_data = city_df[city_df["type"] == "Suburban"]
+rural_data = city_df[city_df["type"] == "Rural"]
+
+```
+
+
+```python
+#getting urban drivers
+urban_total_drivers= urban_data.groupby("type")["driver_count"].sum()
+
+#getting suburban drivers
+suburban_total_drivers= suburban_data.groupby("type")["driver_count"].sum()
+
+#getting rural drivers
+rural_total_drivers= rural_data.groupby("type")["driver_count"].sum()
 
 # Values per Label
-sizes = [sum_drivers[hannah] for hannah in sum_drivers.keys()]
+sizes = [urban_total_drivers, suburban_total_drivers, rural_total_drivers]
 
 # Formatting
 colors = ["gold", "lightcoral", "lightskyblue"]
@@ -237,5 +251,5 @@ plt.show()
 ```
 
 
-![png](output_5_0.png)
+![png](output_6_0.png)
 
